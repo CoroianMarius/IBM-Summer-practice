@@ -8,6 +8,10 @@
     background-color: #FFFFFF;
 }
 
+.marginTop{
+    margin-top: 7%;
+}
+
 .imag{
      width: 40% ;
      object-fit:cover;
