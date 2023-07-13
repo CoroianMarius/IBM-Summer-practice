@@ -18,10 +18,6 @@ export default function LogPart() {
 
 
 
-    /*
-
-    --------------- Eroare la logare -----------------
-
     AuthServices.login(user).then((data) => {
       const { isAuthenticated, user, message } = data;
       if (isAuthenticated) {
@@ -31,9 +27,7 @@ export default function LogPart() {
       //setMessage(message)
     });
 
-    --------------------------------------------------
-
-    */
+   
 
 
   };
