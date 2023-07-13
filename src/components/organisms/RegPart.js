@@ -3,8 +3,12 @@
 import Link from "next/link";
 import styles from "../../app/login/index.module.css";
 import AuthServices from "@/services/AuthServices";
+import {useRouter} from 'next/navigation'
 
 export default function LogPart() {
+
+  const router = useRouter()
+
   const onSubmit = (e) => {
     e.preventDefault();
     const user = {
@@ -19,6 +23,7 @@ export default function LogPart() {
       console.log(user);
       //setMessage(message)
       console.log(message);
+      router.push('/')
     });
   };
 
