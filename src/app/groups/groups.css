@@ -1,0 +1,48 @@
+.container {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #E1E4EA;
+    padding: 20px 80px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+#navbarElements {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbarElements li {
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+
+#navbarElements li a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333333;
+    transition: 0.3s ease-in-out;
+}
+
+
+#navbarElements li a.admin {
+    color: #EE4747;
+}
+#navbarElements li a:hover {
+    color: #8DAAE1;
+} 
+
+#navbarElements li a:hover::after,
+#navbarElements li a.admin::after {
+    content: '';
+    width: 30%;
+    height: 2px;
+    background-color: #8DAAE1;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
