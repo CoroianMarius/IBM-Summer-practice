@@ -11,7 +11,6 @@ function Nav() {
         <img src="/public/next.svg" alt="logo" className="logo" />       
         <div>
             <ul id="navbarElements">
-                <li><a href="/groups" className="admin">Admin Panel</a></li>
                 <li><a href="/groups">Groups</a></li>
                 <li><a href="/groups">Calendar</a></li>
                 {/* It will be a btn component */}

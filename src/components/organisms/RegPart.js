@@ -19,11 +19,12 @@ export default function LogPart() {
 
     AuthServices.register(user).then((data) => {
       const { user, message } = data;
-      //router.push('/login')
-      console.log(user);
-      //setMessage(message)
-      console.log(message);
-      router.push('/')
+
+      if(message.msgError){
+        alert(message.msgBody)
+      }
+      else
+        router.push('/')
     });
   };
 

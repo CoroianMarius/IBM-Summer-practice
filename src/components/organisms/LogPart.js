@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "../../app/login/index.module.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import AuthServices from "@/services/AuthServices";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,6 @@ export default function LogPart() {
       username: e.target.email.value,
       password: e.target.password.value,
     };
-    console.log(user);
 
     AuthServices.login(user).then((data) => {
       const { isAuthenticated, user, message } = data;
@@ -27,8 +26,9 @@ export default function LogPart() {
         authContext.setUser(user);
         authContext.setIsAuthenticated(isAuthenticated);
         router.push("/");
-      } else console.log(message);
-    });
+      } else alert("Email or Password is invalid")
+    }
+    );
   };
 
   return (
