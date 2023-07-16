@@ -1,12 +1,22 @@
 .container {
     width: 90%;
-    display: flex;
+    position: relative;
+    height: 50px;
+    display: inline-flex;
     align-items: center;
     justify-content: space-between;
     background-color: #E1E4EA;
+    margin: 20px 0;
     padding: 20px 80px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
+
+/* make the background color of the logo to fit the background color of the navbar */
+.logo {
+    height: 80px;
+    opacity: 1;  
+}
+
 
 #navbarElements {
     display: flex;

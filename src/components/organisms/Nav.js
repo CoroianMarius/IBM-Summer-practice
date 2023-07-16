@@ -1,22 +1,43 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import styles from "../../app/groups/groups.css";
-import image from "../../../public/ibmlogo.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+
 
 
 function Nav() {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+
+
   return (
-    <div className="container">            
-        <img src="/public/next.svg" alt="logo" className="logo" />       
-        <div>
-            <ul id="navbarElements">
-                <li><a href="/groups">Groups</a></li>
-                <li><a href="/groups">Calendar</a></li>
-                {/* It will be a btn component */}
-                <li><Link href="/login">Login</Link></li>
-            </ul>
-        </div>
+    <div className={`container ${clicked ? "active" : ""}`}>
+      <img src="/ibmlogo.png" alt="logo" className="logo" />
+      <div>
+        <ul id="navbarElements" className={`${clicked ? "active" : ""}`}>
+          <li>
+            <a href="/groups">Groups</a>
+          </li>
+          <li>
+            <a href="/groups">Calendar</a>
+          </li>
+          <li>
+            <Link href="/login">Login</Link>
+          </li>
+        </ul>
+      </div>
+      <div id="mobile">
+        <FontAwesomeIcon
+          icon={clicked ? faTimes : faBars}
+          onClick={handleClick}
+        />
+      </div>
     </div>
   );
 }
