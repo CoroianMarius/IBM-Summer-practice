@@ -5,17 +5,19 @@ import Nav from "@/components/organisms/Nav";
 import NavAdmin from "@/components/organisms/NavAdmin";
 import NavAuth from "@/components/organisms/NavAuth";
 import { AuthContext } from "@/context/AuthContext";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
+import uuid from "react-uuid";
 
 // TODO: de implementat verificare daca userul e admin in AuthServices
 function isAdmin() {
-  return true;
+  return false;
 }
 
 function getEvents() {
   return [
     {
-      id: 128454,
+      id: uuid(),
       titlu: "Event 1",
       data: "12-07-2023 13:00",
       locatie: "Locatie 1",
@@ -24,7 +26,7 @@ function getEvents() {
       participanti: ["User 1", "User 2", "User 3", "User 4", "User 5"],
     },
     {
-      id: 152343,
+      id: uuid(),
       titlu: "Event 2",
       data: "05-11-2023 08:00",
       locatie: "Locatie 2",
@@ -44,11 +46,14 @@ export default function Home(props) {
   return (
     <>
       {isAuthenticated ? isAdmin() ? <NavAdmin /> : <NavAuth /> : <Nav />}
-      <h1>Homepage</h1>
+      
+      <br></br>
+      <br></br>
+      <br></br>
 
       {events && events.map((event) => (
         <EventCard key={event.id} event={event} />
-      ))} 
+      ))}
       
     </>
   );
