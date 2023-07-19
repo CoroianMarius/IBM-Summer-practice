@@ -24,27 +24,27 @@ export default function AdminPanel() {
       <Nav />
       <div className={styles.container}>
         <div className={styles.sidebar}>SideBar</div>
-        <div className={styles.panelContainer}>
-          <div className={styles.panel}>
+          <div className={styles.panelContainer}>
+            <div className={styles.panel}>
 
-            <ToggleButtonGroup
-              className={styles.toggleGroup}
-              value={selectedValue}
-              exclusive
-              onChange={handleToggleChange}
-            >
-              <ToggleButton value="create" >
-                Create
-              </ToggleButton>
-              <ToggleButton value="edit" >
-                Edit
-              </ToggleButton>
-            </ToggleButtonGroup>
+              <ToggleButtonGroup
+                className={styles.toggleGroup}
+                value={selectedValue}
+                exclusive
+                onChange={handleToggleChange}
+              >
+                <ToggleButton value="create" >
+                  Create
+                </ToggleButton>
+                <ToggleButton value="edit" >
+                  Edit
+                </ToggleButton>
+              </ToggleButtonGroup>
 
-            <CreateEventForm />
+              <CreateEventForm />
 
+            </div>
           </div>
-        </div>
       </div>
     </>
   );

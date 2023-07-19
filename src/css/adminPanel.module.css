@@ -7,7 +7,7 @@
     border-radius: 0.2rem;
     background-color: #E1E4EA;
     border: none;
-    width: 50%;
+    width: 100%;
     display: auto;
     border-bottom: 0.3rem solid transparent;
     transition: all 0.3s;
@@ -25,4 +25,112 @@
     cursor: pointer;
     font-size: large;
     border-radius: 10px;
+}
+
+.formContainerEvent{
+    display: flex;
+    flex-direction: row;
+    gap: 15%;
+}
+
+.mainForm{
+    width: fit-content;
+}
+
+.sideForm{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8%;
+}
+
+.containerParticipanti{
+    max-height: 20em;
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 1% 1.5%;
+    background-color: #E1E4EA;
+    border-radius: 10px;
+}
+
+.controllBtns{
+    display: flex;
+    gap: 1%;
+    margin-bottom: 1%;
+}
+
+.tagsContaincer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1%;
+}
+
+.tagWhite{
+    background-color: white;
+    width: fit-content;
+    text-align: center;
+    flex-wrap: wrap;
+    padding: 1.5% 4%;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tag{
+    background-color: #8DAAE1;
+    width: fit-content;
+    text-align: center;
+    flex-wrap: wrap;
+    color: #E1E4EA;
+    padding: 1.5% 4%;
+    border-radius: 20px;
+    font-weight: normal;
+    margin-bottom: 1%;
+    cursor: pointer;
+}
+
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+.modalContent{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    margin: auto;
+    padding: 2% 2%;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.modalContent::-webkit-scrollbar {
+    display: none;
+  }
+
+.controllContainer{
+    display: flex;
+    gap: 15%;
+}
+
+.noMarg{
+    margin: 0;
+}
+
+.searchBar{
+    flex-grow: 1;
+}
+
+.usersContainer{
+
 }
