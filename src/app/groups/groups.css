@@ -1,19 +1,18 @@
 .container {
     width: 90%;
-    position: relative;
+    position: fixed;
     height: 50px;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     background-color: #E1E4EA;
-    margin: 20px 0;
     padding: 20px 80px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
-/* make the background color of the logo to fit the background color of the navbar */
 .logo {
     height: 80px;
+    width: 80px;
     opacity: 1;  
 }
 
@@ -55,4 +54,47 @@
     position: absolute;
     bottom: -4px;
     left: 20px;
+}
+
+#mobile {
+    display: none;
+}
+
+@media screen and (max-width:769px) {
+    .container {
+        z-index: 1;
+    }
+
+    #navbarElements {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        top: 70px;
+        right: -40%;
+        width: 40%;
+        height: 100vh;
+        background-color: #E1E4EA   ;
+        box-shadow: 0 40px 60px rgb(0, 0 0, 0.1);
+        padding: 40px 0 0 10px;
+    }
+
+    #navbarElements.active {
+        right: 0px;
+    }
+
+    #navbarElements li {
+        margin-bottom: 25px;
+    }
+
+    #mobile {
+        display: block;
+        cursor: pointer;    
+    }
+    /* target the fontawesome icon */
+    #mobile i {
+        font-size: 25px;
+        cursor: pointer;
+    }
 }
