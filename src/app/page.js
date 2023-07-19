@@ -17,7 +17,7 @@ function isAdmin() {
 function getEvents() {
   return [
     {
-      id: uuid(),
+      id: 654651,
       titlu: "Event 1",
       data: "12-07-2023 13:00",
       locatie: "Locatie 1",
@@ -26,7 +26,7 @@ function getEvents() {
       participanti: ["User 1", "User 2", "User 3", "User 4", "User 5"],
     },
     {
-      id: uuid(),
+      id: 151654,
       titlu: "Event 2",
       data: "05-11-2023 08:00",
       locatie: "Locatie 2",

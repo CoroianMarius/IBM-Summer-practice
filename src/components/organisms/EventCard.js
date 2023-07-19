@@ -4,13 +4,13 @@ import EventDetails from "../molecules/eventDetails"
 
 export default function EventCard({event}) {
 
-    const {titlu, data, locatie, descriere, tags} = event
+    const {id, titlu, data, locatie, descriere, tags} = event
 
     return <>
     <div className={styled.event}>
         <div className={styled.tags}>
-            {tags && tags.map((tag) => (
-                <EventTag tag={tag} />
+            {tags?.map((tag) => (
+                <EventTag key={id+tag} tag={tag} />
             ))} 
         </div>
 
