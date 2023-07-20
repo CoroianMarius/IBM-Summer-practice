@@ -10,13 +10,10 @@ export default function Bar() {
       <div className='sidebar'>
       
         <Sidebar width='100%'>
-        <Menu>
-          <SubMenu label="Group 1">
-            <MenuItem> Dep </MenuItem>
-            <MenuItem> Dep </MenuItem>
-          </SubMenu>
-          <MenuItem> Group 2 </MenuItem>
-          <MenuItem> Group 3 </MenuItem>
+        <Menu className='sidebarElements'>
+          <MenuItem className='sidebarItems'> Group 1 </MenuItem>
+          <MenuItem className='sidebarItems'> Group 2 </MenuItem>
+          <MenuItem className='sidebarItems'> Group 3 </MenuItem>
         </Menu>
 
       </Sidebar>

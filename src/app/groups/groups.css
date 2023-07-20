@@ -62,7 +62,7 @@
 
 @media screen and (max-width:769px) {
     .container {
-        z-index: 1;
+        z-index: 2;
     }
 
     #navbarElements {
@@ -72,7 +72,7 @@
         justify-content: flex-start;
         position: fixed;
         top: 70px;
-        right: -40%;
+        right: -45%;
         width: 40%;
         height: 100vh;
         background-color: #E1E4EA   ;
