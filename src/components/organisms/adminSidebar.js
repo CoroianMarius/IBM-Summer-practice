@@ -11,9 +11,10 @@ export default function Bar() {
       
         <Sidebar width='100%'>
         <Menu className='sidebarElements'>
-          <MenuItem className='sidebarItems'> Group 1 </MenuItem>
-          <MenuItem className='sidebarItems'> Group 2 </MenuItem>
-          <MenuItem className='sidebarItems'> Group 3 </MenuItem>
+          <MenuItem className='sidebarItems'> Manage Events </MenuItem>
+          <MenuItem className='sidebarItems'> Manage Groups </MenuItem>
+          <MenuItem className='sidebarItems'> Send Invites </MenuItem>
+          <MenuItem className='sidebarItems'> Manage Admins </MenuItem>
         </Menu>
 
       </Sidebar>

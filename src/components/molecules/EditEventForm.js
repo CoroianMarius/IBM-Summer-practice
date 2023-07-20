@@ -37,10 +37,15 @@ function getDeparts(){
     
 }
 
-export default function CreateEventForm(){
+export default function EditEventForm({event}){
+
+    const {id, titlu, data, locatie, descriere, tag, groups } = event 
+    const eventUsers = event.users
+
+    console.log( id, titlu, data, locatie, descriere, tag, groups )
 
     const tags = getTags()
-    const [selectedTag, setSelectedTag] = useState("")
+    const [selectedTag, setSelectedTag] = useState(tag)
     
     const [users, setUsers] = useState(getUsers())
     const [departs, setDeparts] = useState(getDeparts())
@@ -48,8 +53,8 @@ export default function CreateEventForm(){
     const [AddPerson, setAddPeople] = useState(false);
     const [AddGroup, setAddGroup] = useState(false);
 
-    const [People, setPeople] = useState([]);
-    const [Groups, setGroups] = useState([]);
+    const [People, setPeople] = useState(eventUsers);
+    const [Groups, setGroups] = useState(groups);
 
     const [SelectedPeople, setSelectedPeople] = useState([]);
     const [SelectedGroups, setSelectedGroups] = useState([]);
@@ -122,7 +127,7 @@ export default function CreateEventForm(){
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const event = {
+        const eventSubmit = {
             titlu: e.target.titlu.value,
             data: e.target.data.value,
             locatie: e.target.locatie.value,
@@ -132,7 +137,7 @@ export default function CreateEventForm(){
             groups: Groups
         }
 
-        console.log(event);
+        console.log(eventSubmit)
 
       };
 
@@ -140,20 +145,20 @@ export default function CreateEventForm(){
         <form className={styles.mainForm} onSubmit={onSubmit}>
 
             <p >Titlu</p>
-            <input name="titlu" className={styles.input} type="text"/>
+            <input name="titlu" className={styles.input} type="text" defaultValue={titlu}/>
 
             <p >Data</p>
-            <input name="data" className={styles.input} type="datetime-local"/>
+            <input name="data" className={styles.input} type="datetime-local" defaultValue={data}/>
 
             <p >Locatie</p>
-            <input name="locatie" className={styles.input} type="text"/>
+            <input name="locatie" className={styles.input} type="text" defaultValue={locatie}/>
 
             <p >Descriere</p>
-            <input name="descriere" className={styles.input} type="text"/>
+            <input name="descriere" className={styles.input} type="text" defaultValue={descriere}/>
 
             <br></br>
 
-            <input className={styles.button} type="submit" value="Create Event" />
+            <input className={styles.button} type="submit" value="Edit Event" />
         </form>
 
         <div className={styles.sideForm}>
