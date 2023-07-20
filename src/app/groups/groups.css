@@ -76,7 +76,7 @@
         width: 40%;
         height: 100vh;
         background-color: #E1E4EA   ;
-        box-shadow: 0 40px 60px rgb(0, 0 0, 0.1);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.6);
         padding: 40px 0 0 10px;
     }
 

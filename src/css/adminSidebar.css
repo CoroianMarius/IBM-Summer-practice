@@ -1,0 +1,18 @@
+.sidebar {
+    position: fixed;
+    display: block;
+
+    margin: 5.9% 0 0 0;
+    height: 50%;
+    width: 25%;
+    background-color: #E1E4EA;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.6);
+    transition: all 0.5s ease;
+}
+
+/* @media (min-width:400px) and (max-width:900px) {
+    .sidebar {
+        width: 30%;
+    }
+
+} */

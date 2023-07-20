@@ -11,7 +11,7 @@ import uuid from "react-uuid";
 
 // TODO: de implementat verificare daca userul e admin in AuthServices
 function isAdmin() {
-  return false;
+  return true;
 }
 
 function getEvents() {
