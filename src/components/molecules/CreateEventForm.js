@@ -119,6 +119,17 @@ export default function CreateEventForm(){
         setSelectedTag(event.target.value);
       };
 
+    const removePerson = (personToRemove) => {
+        const updatedPeople = People.filter((person) => person !== personToRemove);
+        setPeople(updatedPeople);
+        setUsers(getUsers().filter((item) => !updatedPeople.includes(item)))
+    }
+    const removeGruop = (personToRemove) => {
+        const updatedPeople = Groups.filter((person) => person !== personToRemove);
+        setGroups(updatedPeople);
+        setDeparts(getDeparts().filter((item) => !updatedPeople.includes(item)))
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -182,10 +193,10 @@ export default function CreateEventForm(){
                 <div className={styles.tagsContaincer}>
 
                     {People?.map((person) =>(
-                        <div key={person} className={styles.tag}>{person}</div>
+                        <div key={person} onClick={() => removePerson(person)} className={styles.tag}>{person}</div>
                     ))}
                     {Groups?.map((group) =>(
-                        <div key={group} className={styles.tag}>{group}</div>
+                        <div key={group} onClick={() => removeGruop(group)} className={styles.tag}>{group}</div>
                     ))}
 
                 </div>
