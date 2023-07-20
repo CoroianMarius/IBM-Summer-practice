@@ -40,7 +40,7 @@ function getDeparts(){
 export default function CreateEventForm(){
 
     const tags = getTags()
-    const [tag, setTag] = useState("")
+    const [selectedTag, setTag] = useState("")
     
     const [users, setUsers] = useState(getUsers())
     const [departs, setDeparts] = useState(getDeparts())
@@ -158,7 +158,7 @@ export default function CreateEventForm(){
                 <NativeSelect
                 className={styles.input}
                 inputProps={{
-                    name: 'age'    
+                    name: 'tag'    
                 }}
                 >
                     {tags && tags.map((tag) => (

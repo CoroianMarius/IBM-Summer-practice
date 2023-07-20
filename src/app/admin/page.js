@@ -2,9 +2,9 @@
 
 import React, { useState, useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
-import NavAdmin from "@/components/organisms/NavAdmin";
 import styles from "./admin.module.css";
-import Nav from "@/components/organisms/Nav";
+import NavAdmin from "@/components/organisms/NavAdmin";
+import AdminSideBar from "@/components/organisms/adminSidebar"
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import CreateEventForm from "@/components/molecules/CreateEventForm";
 
@@ -21,9 +21,9 @@ export default function AdminPanel() {
 
   return (
     <>
-      <Nav />
+      <NavAdmin />
       <div className={styles.container}>
-        <div className={styles.sidebar}>SideBar</div>
+        <div className={styles.sidebar}> <AdminSideBar className={`${styles.noMarg} ${styles.posRel}`}/> </div>
           <div className={styles.panelContainer}>
             <div className={styles.panel}>
 
