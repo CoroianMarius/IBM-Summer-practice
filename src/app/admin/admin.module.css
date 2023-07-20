@@ -1,0 +1,31 @@
+.sidebar{
+    width: 15%;
+    background-color: blue;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10%;
+}
+
+.panelContainer{
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 0% 10%;
+}
+
+.panel{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1% 5%;
+}
+
+.toggleGroup{
+    width: 15%;
+}
+
+  
