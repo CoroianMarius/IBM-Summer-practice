@@ -36,7 +36,9 @@ function NavAuth() {
   return (
 
     <div className={`container ${clicked ? "active" : ""}`}>
-      <img src="/ibmlogo.png" alt="logo" className="logo" />
+      <Link href="/">
+        <img src="/ibmlogo.png" alt="logo" className="logo" />
+      </Link>
       <div>
         <ul id="navbarElements" className={`${clicked ? "active" : ""}`}>
           <li>

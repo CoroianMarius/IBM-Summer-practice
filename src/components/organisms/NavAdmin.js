@@ -36,11 +36,13 @@ function NavAdmin() {
   return (
 
     <div className={`container ${clicked ? "active" : ""}`}>
-      <img src="/ibmlogo.png" alt="logo" className="logo" />
+      <Link href="/">
+        <img src="/ibmlogo.png" alt="logo" className="logo" />
+      </Link>
       <div>
         <ul id="navbarElements" className={`${clicked ? "active" : ""}`}>
           <li>
-            <a href="/groups" className="admin">Admin Panel</a>
+            <a href="/admin" className="admin">Admin Panel</a>
           </li>
           <li>
             <a href="/groups">Groups</a>
