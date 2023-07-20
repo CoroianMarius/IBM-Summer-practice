@@ -130,7 +130,7 @@ export default function AdminPanel() {
                       </div>
                   </> :
                   <EditEventForm event={selectedEvent} />
-              
+
               }
 
             </div>

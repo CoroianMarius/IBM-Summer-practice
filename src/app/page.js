@@ -6,8 +6,10 @@ import NavAdmin from "@/components/organisms/NavAdmin";
 import NavAuth from "@/components/organisms/NavAuth";
 import { AuthContext } from "@/context/AuthContext";
 import { faL } from "@fortawesome/free-solid-svg-icons";
+import { headers } from "next/dist/client/components/headers";
 import { useContext } from "react";
 import uuid from "react-uuid";
+import axios from "axios";
 
 // TODO: de implementat verificare daca userul e admin in AuthServices
 function isAdmin() {
@@ -15,6 +17,7 @@ function isAdmin() {
 }
 
 function getEvents() {
+
   return [
     {
       id: 654651,
