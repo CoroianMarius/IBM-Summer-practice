@@ -1,0 +1,11 @@
+.discoverEvents{
+    margin-top: 7%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.discoverHeader{
+    width: fit-content;
+}

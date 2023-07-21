@@ -5,11 +5,8 @@ import Nav from "@/components/organisms/Nav";
 import NavAdmin from "@/components/organisms/NavAdmin";
 import NavAuth from "@/components/organisms/NavAuth";
 import { AuthContext } from "@/context/AuthContext";
-import { faL } from "@fortawesome/free-solid-svg-icons";
-import { headers } from "next/dist/client/components/headers";
 import { useContext } from "react";
-import uuid from "react-uuid";
-import axios from "axios";
+import styles from "@/css/homepage.module.css";
 
 // TODO: de implementat verificare daca userul e admin in AuthServices
 function isAdmin() {
@@ -54,9 +51,12 @@ export default function Home(props) {
       <br></br>
       <br></br>
 
-      {events && events.map((event) => (
-        <EventCard key={event.id} event={event} />
-      ))}
+      <div className={styles.discoverEvents}>
+        <h1 className={styles.discoverHeader}>Discover Events</h1>
+        {events && events.map((event) => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </div>
       
     </>
   );
