@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useContext } from "react";
+import GroupsManagement from "@/components/organisms/groupsManagement";
 import { AuthContext } from "@/context/AuthContext";
 import styles from "./admin.module.css";
 import NavAdmin from "@/components/organisms/NavAdmin";
@@ -8,6 +9,24 @@ import AdminSideBar from "@/components/organisms/AdminSidebar"
 import { FormControl, NativeSelect, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import CreateEventForm from "@/components/molecules/CreateEventForm";
 import EditEventForm from "@/components/molecules/EditEventForm";
+
+function getGroups()
+{
+  return [
+    {
+      name: "HR",
+      users: ["user 1", "user 2", "user 3"],
+    },
+    {
+      name: "IT",
+      users: ["user 1", "user 2", "user 3"],
+    },
+    {
+      name: "Productie",
+      users: ["user 1", "user 2", "user 3"],
+    },
+  ]
+}
 
 function getEvents(){
   return [
@@ -88,7 +107,7 @@ export default function AdminPanel() {
           <div className={styles.panelContainer}>
             <div className={styles.panel}>
 
-              <ToggleButtonGroup
+              {/*<ToggleButtonGroup
                 className={styles.toggleGroup}
                 value={selectedValue}
                 exclusive
@@ -131,8 +150,8 @@ export default function AdminPanel() {
                   </> :
                   <EditEventForm event={selectedEvent} />
 
-              }
-
+              }*/}
+              <GroupsManagement groups={getGroups()}/>
             </div>
           </div>
       </div>

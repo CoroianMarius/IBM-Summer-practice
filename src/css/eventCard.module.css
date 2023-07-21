@@ -1,7 +1,7 @@
 .event{
     background-color: white;
     width: 80%;
-    padding: 3% 7%; 
+    padding: 3% 7%;
     margin: 0 2% 5% 2%;
     border-radius: 7px;
     font-weight: 500;
@@ -41,21 +41,19 @@
     width: 50%;
 }
 
-.acceptBtn{
+.acceptBtn {
     background-color: #567ECA;
-    text-align: center;
-    justify-content: center;
     color: #E1E4EA;
     font-size: 20px;
     font-weight: 500;
     font-style: normal;
     text-decoration: none;
-    margin: 0 50%;
-    padding: 5% 25%;
+    padding: 20px;
     border: 0px solid #000;
     border-radius: 20px;
-    display: inline-block;
+
     cursor: pointer;
+    width: 25%; /* Adjust the width as per your preference */
 }
 
 .acceptBtn:hover{
@@ -93,7 +91,7 @@
         z-index: 1; 
         padding: 5% 3%;
         margin: 5% 0;
-        width: 40%;
+        width: 20%;
         height: 40px;
         display: flex;
         justify-content: center;
@@ -102,4 +100,33 @@
         top: 10%;
         
     }
+}
+.Dept {
+    justify-content: flex-start;
+    padding: 5px;
+    margin-top: 5%;
+    margin-right: 2%;
+    margin-left:0;
+    margin-bottom: 5%;
+    width: 80%;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#create
+{  margin-left:1px;
+    background-color: #e1e4ea;
+    width: 20%;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: none;
+    border: 0px solid #e1e4ea;
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+
 }

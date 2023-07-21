@@ -1,6 +1,7 @@
 "use client";
 
 import EventCard from "@/components/organisms/EventCard";
+import groupsManagement from "@/components/organisms/groupsManagement";
 import Nav from "@/components/organisms/Nav";
 import NavAdmin from "@/components/organisms/NavAdmin";
 import NavAuth from "@/components/organisms/NavAuth";
@@ -8,6 +9,11 @@ import { AuthContext } from "@/context/AuthContext";
 import { useContext, useEffect,useState } from "react";
 import styles from "@/css/homepage.module.css";
 import axios from "axios";
+
+
+
+
+
 
 // TODO: de implementat verificare daca userul e admin in AuthServices
 function isAdmin() {
@@ -68,6 +74,7 @@ export default function Home(props) {
           <EventCard key={event._id} event={event} />
         ))}
       </div>
+
       
     </>
   );
