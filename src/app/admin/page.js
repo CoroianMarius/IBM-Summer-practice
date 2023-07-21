@@ -9,6 +9,7 @@ import AdminSideBar from "@/components/organisms/AdminSidebar"
 import { FormControl, NativeSelect, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import CreateEventForm from "@/components/molecules/CreateEventForm";
 import EditEventForm from "@/components/molecules/EditEventForm";
+import SendInvites from "@/components/molecules/SendInvites";
 
 function getGroups()
 {
@@ -152,6 +153,7 @@ export default function AdminPanel() {
 
               }*/}
               <GroupsManagement groups={getGroups()}/>
+              <SendInvites />
             </div>
           </div>
       </div>
