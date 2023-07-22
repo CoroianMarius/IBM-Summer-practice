@@ -9,6 +9,7 @@ import { AuthContext } from "@/context/AuthContext";
 import { useContext, useEffect,useState } from "react";
 import styles from "@/css/homepage.module.css";
 import axios from "axios";
+import UpcomingEvents from "@/components/molecules/UpcomingEvents";
 
 
 
@@ -49,9 +50,6 @@ export default function Home(props) {
     useContext(AuthContext);
   const [events, setEvents] = useState([]);
 
-  // const events = getEvents();
-
-
   useEffect(() => {
     async function fetchUndiscoveredEvents(){
       setEvents((await axios.get('http://localhost:5000/events/discover',{withCredentials: true})).data.events)
@@ -68,11 +66,15 @@ export default function Home(props) {
       <br></br>
       <br></br>
 
-      <div className={styles.discoverEvents}>
-        <h1 className={styles.discoverHeader}>Discover Events</h1>
-        {events && events.map((event) => (
-          <EventCard key={event._id} event={event} />
-        ))}
+      <div className={styles.mainContainer}>
+        <div className={styles.discoverEvents}>
+          <h1 className={styles.discoverHeader}>Discover Events</h1>
+          {events && events.map((event) => (
+            <EventCard key={event._id} event={event} />
+          ))}
+        </div>
+
+        <UpcomingEvents />
       </div>
 
       

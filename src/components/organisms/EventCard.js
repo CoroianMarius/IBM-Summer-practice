@@ -8,9 +8,11 @@ export default function EventCard({event}) {
 
     return <>
     <div className={styled.event}>
-        <div className={styled.tags}>            
-                <EventTag key={_id} tag={tags} />
-        </div>
+        {tags !== "" &&
+            <div className={styled.tags}>            
+                    <EventTag key={_id} tag={tags} />
+            </div>
+        }   
 
         <div className={styled.main}>
             <EventDetails title={title} date={date} location={location} description={description} />

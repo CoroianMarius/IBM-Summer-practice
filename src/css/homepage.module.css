@@ -1,11 +1,19 @@
 .discoverEvents{
-    margin-top: 7%;
     align-items: center;
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column; 
 }
 
 .discoverHeader{
     width: fit-content;
+    margin-top: 0;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: row;
+    margin-top: 6%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }

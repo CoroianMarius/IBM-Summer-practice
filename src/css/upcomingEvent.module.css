@@ -1,0 +1,42 @@
+.mainContainer{
+    background-color: #E1E4EA;
+    width: 40%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    overflow-y: scroll;
+}
+
+.mainContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+.header{
+    font-weight: bold;
+    width: fit-content;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.details{
+    background-color: white;
+    display: flex;
+    width: 80%;
+    border-radius: 10px;
+    margin-bottom: 3%;
+}
+
+.details p{
+    display: flex;
+    align-items: center;
+}
+
+.paddLeft{
+    padding-left: 5%;
+}
+
+.paddRight{
+    padding-right: 5%;
+}
