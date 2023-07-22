@@ -13,9 +13,6 @@ import UpcomingEvents from "@/components/molecules/UpcomingEvents";
 
 
 
-
-
-
 // TODO: de implementat verificare daca userul e admin in AuthServices
 function isAdmin() {
   return true;

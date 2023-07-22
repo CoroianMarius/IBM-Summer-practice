@@ -42,7 +42,7 @@ function NavAuth() {
       <div>
         <ul id="navbarElements" className={`${clicked ? "active" : ""}`}>
           <li>
-            <a href="/groups">Groups</a>
+            <a href="/groupsV2">Groups</a>
           </li>
           <li>
             <a href="/groups">Calendar</a>

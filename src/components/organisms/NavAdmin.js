@@ -45,7 +45,7 @@ function NavAdmin() {
             <a href="/admin" className="admin">Admin Panel</a>
           </li>
           <li>
-            <a href="/groups">Groups</a>
+            <a href="/groupsV2">Groups</a>
           </li>
           <li>
             <a href="/groups">Calendar</a>
