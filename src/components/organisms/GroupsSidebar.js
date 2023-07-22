@@ -1,6 +1,7 @@
 "use client";
 
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import {useState} from "react";
 import { Link } from 'react-router-dom';
 import Searchbar from '../molecules/Searchbar';
 import styles from '../../css/groupsSidebar.css';

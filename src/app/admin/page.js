@@ -6,7 +6,15 @@ import { AuthContext } from "@/context/AuthContext";
 import styles from "./admin.module.css";
 import NavAdmin from "@/components/organisms/NavAdmin";
 import AdminSideBar from "@/components/organisms/AdminSidebar"
-import { FormControl, NativeSelect, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  NativeSelect,
+  ToggleButton,
+  ToggleButtonGroup
+} from "@mui/material";
 import CreateEventForm from "@/components/molecules/CreateEventForm";
 import EditEventForm from "@/components/molecules/EditEventForm";
 import SendInvites from "@/components/molecules/SendInvites";
@@ -101,10 +109,10 @@ export default function AdminPanel() {
 
 
   return (
-    <>
-      <NavAdmin />
-      <div className={styles.container}>
-        <div className={styles.sidebar}> <AdminSideBar /> </div>
+      <>
+        <NavAdmin/>
+        <div className={styles.container}>
+          <div className={styles.sidebar}><AdminSideBar/></div>
           <div className={styles.panelContainer}>
             <div className={styles.panel}>
 
@@ -153,11 +161,12 @@ export default function AdminPanel() {
 
               }*/}
               <GroupsManagement groups={getGroups()}/>
-              <SendInvites />
+
+              {/*<SendInvites/>*/}
             </div>
           </div>
-      </div>
-    </>
+        </div>
+      </>
   );
 }
 
