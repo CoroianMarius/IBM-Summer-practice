@@ -212,7 +212,7 @@ function SendInvites() {
               ))}
             </div>
             
-            <button onClick={handleSubmin}>Adedwa</button>
+            <button onClick={handleSubmin} className={styles.button}>Send Invites</button>
 
           </>
         )}
