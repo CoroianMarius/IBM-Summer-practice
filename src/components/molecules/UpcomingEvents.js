@@ -1,7 +1,9 @@
 import styles from '@/css/upcomingEvent.module.css'
 import EventMini from "../atoms/EventMini"
+import {useEffect, useState} from "react";
+import axios, {Axios} from "axios";
 
-function getUpcomingEvent(){
+function getUpEvent(){
     return [
         {
             "_id": "64ba8be0e0c4df213cd6f7b9",
@@ -120,7 +122,15 @@ function getUpcomingEvent(){
 }
 
 export default function UpcomingEvents(){
-    const upcomingEvents = getUpcomingEvent()
+
+    const [upcomingEvents, setupcomingEvents] = useState([]);
+    useEffect(()=>{
+        async function getUpcomingEvents(){
+            setupcomingEvents((await axios.get('http://localhost:5000/events/upcoming',{withCredentials:true})).data.events)
+        }
+        getUpcomingEvents()
+    }, [])
+    console.log(upcomingEvents)
 
     return(
         <div className={styles.mainContainer}>
