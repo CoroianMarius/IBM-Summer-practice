@@ -11,6 +11,6 @@ export default function GroupMenuButton({group}){
     };
 
     return(
-        <div onClick={handleGroupClick} className={`${styles.groupMenuButton} `}>{group.nume}</div>
+        <div onClick={handleGroupClick} className={`${styles.groupMenuButton} `}>{group.name}</div>
     )
 }

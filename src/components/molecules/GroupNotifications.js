@@ -7,7 +7,6 @@ import { useState } from "react"
 
 export default function GroupNotifications({notifications}){
 
-    const [index, setIndex] = useState(0)
 
     return <div className={styles.notificationsContainer}>
         {notifications?.map((notification, idx) => (

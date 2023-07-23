@@ -125,6 +125,16 @@ function SendInvites() {
     const handleRemoveGroup = (group) => {
       setSelectedGroups((prevSelectedGroups) => prevSelectedGroups.filter((g) => g !== group));
     };
+
+    const handleSubmin = () => {
+      const invites = {
+        event: selectedEvent,
+        users: selectedUsers,
+        groups: selectedGroups
+      }
+
+      console.log(invites)
+    }
     
   
     return (
@@ -201,6 +211,9 @@ function SendInvites() {
                 </div>
               ))}
             </div>
+            
+            <button onClick={handleSubmin}>Adedwa</button>
+
           </>
         )}
       </div>

@@ -63,12 +63,6 @@ export default function GroupsContainer(){
 
     const selectedGroup = useGroup()
 
-
-
-
-
-
-
     const [selectedGroups, setselectedGroups] = useState([]);
     useEffect(()=>{
         async function getselectedGroups(){
@@ -77,8 +71,6 @@ export default function GroupsContainer(){
         getselectedGroups()
     }, [])
     console.log(selectedGroups)
-
-
 
 
     return(

@@ -4,7 +4,7 @@ import GroupNotifications from "./GroupNotifications"
 
 export default function GroupsContent({group}){
     return<div className={styles.groupsContent}>
-        <GroupHeader name={group.nume} />
+        <GroupHeader name={group.name} />
         <GroupNotifications notifications={group.notifications} />
     </div>
 }
