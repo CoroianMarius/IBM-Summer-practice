@@ -116,7 +116,7 @@ export default function AdminPanel() {
           <div className={styles.panelContainer}>
             <div className={styles.panel}>
 
-              {/*<ToggleButtonGroup
+              <ToggleButtonGroup
                 className={styles.toggleGroup}
                 value={selectedValue}
                 exclusive
@@ -159,8 +159,8 @@ export default function AdminPanel() {
                   </> :
                   <EditEventForm event={selectedEvent} />
 
-              }*/}
-              <GroupsManagement groups={getGroups()}/>
+              }
+              {/* <GroupsManagement groups={getGroups()}/> */}
 
               {/*<SendInvites/>*/}
             </div>
