@@ -10,21 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateEventForm from "@/components/molecules/CreateEventForm";
 
-// sa apara evenimentele intai si apoi cand selectezi un eveniment sa apara participanti si grupuri
-// sa poti selecta mai multi participanti si grupuri
-// sa poti sterge participanti si grupuri
-// sa poti adauga participanti si grupuri
-// sa poti trimite invitatii
-
-
-// given the code from CreateEventForm.js, create a new component called SendInvites.js that will have the following functionality:
-// - display a list of events (from the getEvents() function) in a dropdown menu (use the Select component from Material UI) and a button that says "Select Event"
-// - when the user selects an event from the dropdown menu and clicks the "Select Event" button, the component should display a list of users and groups (from the getUsers() and getGroups() functions) in two separate lists
-// - the user should be able to select multiple users and groups from the lists
-// - the user should be able to remove users and groups from the lists
-// - the user should be able to add users and groups to the lists
-// - the user should be able to send invites to the selected users and groups (use the Checkbox component from Material UI)
-
 function getEvents(){
     return [
         {
