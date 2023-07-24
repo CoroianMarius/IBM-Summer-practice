@@ -25,7 +25,7 @@ function Nav() {
             <a href="/groupsV2">Groups</a>
           </li>
           <li>
-            <a href="/groups">Calendar</a>
+            <a href="/calendar">Calendar</a>
           </li>
           <li>
             <Link href="/login">Login</Link>

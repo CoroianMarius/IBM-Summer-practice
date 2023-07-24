@@ -26,7 +26,7 @@ const Logout = () => {
       window.location.reload(true)
   };
 
-function NavAuth() {
+function NavAuthRel() {
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -35,7 +35,7 @@ function NavAuth() {
 
   return (
 
-    <div className={`container ${clicked ? "active" : ""}`}>
+    <div className={`container ${clicked ? "active" : ""}`} style={{ position: "relative" }}>
       <Link href="/">
         <img src="/ibmlogo.png" alt="logo" className="logo" />
       </Link>
@@ -81,4 +81,4 @@ function NavAuth() {
   );
 }
 
-export default NavAuth;
+export default NavAuthRel;

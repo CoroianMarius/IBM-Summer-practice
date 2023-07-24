@@ -26,7 +26,7 @@ const Logout = () => {
       window.location.reload(true)
   };
 
-function NavAuth() {
+function NavAdminRel() {
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -35,12 +35,15 @@ function NavAuth() {
 
   return (
 
-    <div className={`container ${clicked ? "active" : ""}`}>
+    <div className={`container ${clicked ? "active" : ""}`} style={{ position: "relative" }}>
       <Link href="/">
         <img src="/ibmlogo.png" alt="logo" className="logo" />
       </Link>
       <div>
         <ul id="navbarElements" className={`${clicked ? "active" : ""}`}>
+          <li>
+            <a href="/admin" className="admin">Admin Panel</a>
+          </li>
           <li>
             <a href="/groupsV2">Groups</a>
           </li>
@@ -61,15 +64,12 @@ function NavAuth() {
     </div>
 
 
-
-
-
-
-
+    
     // <div className="container">            
     //     <img src="/public/next.svg" alt="logo" className="logo" />       
     //     <div>
     //         <ul id="navbarElements">
+    //             <li><a href="/groups" className="admin">Admin Panel</a></li>
     //             <li><a href="/groups">Groups</a></li>
     //             <li><a href="/groups">Calendar</a></li>
     //             {/* It will be a btn component */}
@@ -77,8 +77,7 @@ function NavAuth() {
     //         </ul>
     //     </div>
     // </div>
-
   );
 }
 
-export default NavAuth;
+export default NavAdminRel;

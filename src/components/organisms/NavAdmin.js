@@ -48,7 +48,7 @@ function NavAdmin() {
             <a href="/groupsV2">Groups</a>
           </li>
           <li>
-            <a href="/groups">Calendar</a>
+            <a href="/calendar">Calendar</a>
           </li>
           <li>
             <a onClick={Logout}>Logout</a>
