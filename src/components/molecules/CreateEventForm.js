@@ -17,11 +17,19 @@ function getTags() {
 
 function getUsers(){
     return [
-        "user 1",
-        "user 2",
-        "user 3",
-        "user 4",
-        "user 5"
+        {
+            id:"1234",
+            username: "vlad",
+            password: "12344",
+            role: "admin",
+        },
+        {
+            id:"12345",
+            username: "dani",
+            password: "12344",
+            role: "admin",
+        },
+
     ]
     
 }
@@ -193,7 +201,7 @@ export default function CreateEventForm(){
                 <div className={styles.tagsContaincer}>
 
                     {People?.map((person) =>(
-                        <div key={person} onClick={() => removePerson(person)} className={styles.tag}>{person}</div>
+                        <div key={person.id} onClick={() => removePerson(person)} className={styles.tag}>{person.username}</div>
                     ))}
                     {Groups?.map((group) =>(
                         <div key={group} onClick={() => removeGruop(group)} className={styles.tag}>{group}</div>
@@ -214,12 +222,12 @@ export default function CreateEventForm(){
 
                         {users && <FormGroup className={styles.usersContainer}>
                             {users.map((user) => (
-                                <div key={user} className={styles.userCheck}>
+                                <div key={user.id} className={styles.userCheck}>
                                     <FormControlLabel control={<Checkbox 
                                             checked={SelectedPeople.includes(user)}
                                             onChange={handleUserClick(user)}
                                         />
-                                    } label={user} />
+                                    } label={user.username} />
                                 </div>
                             ))} 
                         </FormGroup>
