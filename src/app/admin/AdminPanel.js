@@ -26,7 +26,7 @@ function getGroups()
   return [
     {
       name: "HR",
-      users: ["user 1", "user 2", "user 3"],
+      users: ["user 1"],
     },
     {
       name: "IT",
@@ -34,7 +34,7 @@ function getGroups()
     },
     {
       name: "Productie",
-      users: ["user 1", "user 2", "user 3"],
+      users: ["user 1", "user 2"],
     },
   ]
 }

@@ -98,4 +98,15 @@
     font-size: large;
     border-radius: 10px;
 }
+
+.textP{
+    width: fit-content;
+}
   
+.margTop{
+    margin-top: 0px;
+}
+
+.spaceBetween{
+    justify-content: space-between;
+}

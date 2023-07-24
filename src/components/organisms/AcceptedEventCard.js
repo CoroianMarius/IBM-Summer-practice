@@ -5,6 +5,7 @@ import EventDetails from "../molecules/eventDetails"
 export default function EventCard({event}) {
 
     const {_id, title, date, location, description, tags} = event
+    console.log(tags);
 
     return <>
     <div className={styled.event}>
