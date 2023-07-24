@@ -5,6 +5,7 @@ import { Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuIte
 import { DateTimePicker } from "@mui/x-date-pickers"; // Import the DateTimePicker from @mui/lab
 import EventTag from "../atoms/EventTag";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function getTags() {
     return [
@@ -31,7 +32,7 @@ function getUsers(){
         },
 
     ]
-    
+
 }
 
 function getDeparts(){
@@ -154,6 +155,32 @@ export default function CreateEventForm(){
         console.log(event);
 
       };
+
+
+
+
+
+
+
+
+    useEffect(()=> {
+        async function getUsers(){
+            setUsers((await axios.get('http://localhost:5000/user', {withCredentials:true})).data.users)
+        }
+        getUsers()
+    }, [])
+    console.log(users)
+
+
+
+
+
+
+
+
+
+
+
 
     return <div className={styles.formContainerEvent}>
         <form className={styles.mainForm} onSubmit={onSubmit}>
