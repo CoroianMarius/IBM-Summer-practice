@@ -17,9 +17,6 @@ function getTags() {
   }
 
 
-
-
-
 export default function CreateEventForm(){
 
     const tags = getTags()
@@ -27,6 +24,9 @@ export default function CreateEventForm(){
     
     const [users, setUsers] = useState([])
     const [departs, setDeparts] = useState([])
+
+    const [InitialUsers, setInitialUsers] = useState([])
+    const [InitialGroups, setInitialGroups] = useState([])
 
     const [AddPerson, setAddPeople] = useState(false);
     const [AddGroup, setAddGroup] = useState(false);
@@ -105,12 +105,12 @@ export default function CreateEventForm(){
     const removePerson = (personToRemove) => {
         const updatedPeople = People.filter((person) => person !== personToRemove);
         setPeople(updatedPeople);
-        setUsers(getUsers().filter((item) => !updatedPeople.includes(item)))
+        setUsers(InitialUsers.filter((item) => !updatedPeople.includes(item)))
     }
     const removeGruop = (personToRemove) => {
         const updatedPeople = Groups.filter((person) => person !== personToRemove);
         setGroups(updatedPeople);
-        setDeparts(getDeparts().filter((item) => !updatedPeople.includes(item)))
+        setDeparts(InitialGroups.filter((item) => !updatedPeople.includes(item)))
     }
 
     const onSubmit = (e) => {
@@ -140,6 +140,7 @@ export default function CreateEventForm(){
     useEffect(()=> {
         async function getUsers(){
             setUsers((await axios.get('http://localhost:5000/user', {withCredentials:true})).data.users)
+            setInitialUsers((await axios.get('http://localhost:5000/user', {withCredentials:true})).data.users);
         }
         getUsers()
     }, [])
@@ -150,6 +151,7 @@ export default function CreateEventForm(){
     useEffect(()=> {
         async function getDeparts(){
             setDeparts((await axios.get('http://localhost:5000/groups', {withCredentials:true})).data.groups)
+            setInitialGroups((await axios.get('http://localhost:5000/groups', {withCredentials:true})).data.groups)
         }
         getDeparts()
     }, [])
