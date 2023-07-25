@@ -48,6 +48,9 @@ function NavAuthRel() {
             <a href="/calendar">Calendar</a>
           </li>
           <li>
+            <a href="/events">Events</a>
+          </li>
+          <li>
             <a onClick={Logout}>Logout</a>
           </li>
         </ul>

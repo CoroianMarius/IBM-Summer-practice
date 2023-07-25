@@ -28,6 +28,9 @@ function Nav() {
             <a href="/calendar">Calendar</a>
           </li>
           <li>
+            <a href="/events">Events</a>
+          </li>
+          <li>
             <Link href="/login">Login</Link>
           </li>
         </ul>
