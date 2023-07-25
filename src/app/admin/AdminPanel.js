@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import GroupsManagement from "@/components/organisms/groupsManagement";
 import { AuthContext } from "@/context/AuthContext";
 import styles from "./admin.module.css";
@@ -22,34 +22,25 @@ import SendInvites from "@/components/molecules/SendInvites";
 import ManageEvents from "@/components/organisms/ManageEvents";
 import ManageAdmins from "@/components/organisms/ManageAdmins";
 
-function getGroups()
-{
-
-    // tr inlocuit cu un get/groups
-
-  return [
-    {
-      name: "HR",
-      users: ["user 1"],
-    },
-    {
-      name: "IT",
-      users: ["user 1", "user 2", "user 3"],
-    },
-    {
-      name: "Productie",
-      users: ["user 1", "user 2"],
-    },
-  ]
-}
-
-
 
 export default function AdminPanel() {
   const { user, setUser, isAuthenticated, setIsAuthenticated } =
     useContext(AuthContext);
 
   const selectedMenu = useMenu()
+
+  const [groups, setGroups] = useState([]);
+
+  useEffect(() => {
+    const getGrps = async () => {
+        const response = await fetch("http://localhost:5000/groups", {credentials: "include"})
+        const data = await response.json()
+        
+        console.log("aici sunt toate eventurile la care sunt invitat'")
+        setGroups(data.groups);
+        }
+        getGrps()
+}, [])
 
   return (
       <>
@@ -60,7 +51,7 @@ export default function AdminPanel() {
             <div className={styles.panel}>
 
               {selectedMenu === "Manage Events" && <ManageEvents /> }
-              {selectedMenu === "Manage Groups" && <GroupsManagement groups={getGroups()}/> }
+              {selectedMenu === "Manage Groups" && <GroupsManagement groups={groups}/> }
               {selectedMenu === "Send Invites" && <SendInvites /> }
               {selectedMenu === "Manage Admins" && <ManageAdmins /> }
 

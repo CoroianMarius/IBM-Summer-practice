@@ -1,7 +1,8 @@
 import styled from "../../css/eventCard.module.css"
 import styles from "@/app/admin/admin.module.css";
 import {Checkbox, FormControlLabel, FormGroup} from "@mui/material";
-import React, {useState} from "react";
+import axios from "axios";
+import React, {useState, useEffect} from "react";
 
 
 
@@ -24,7 +25,20 @@ function getUsers(){
 
 export default function groupsManagement({groups}){
 
-    const [departs, setDeparts] = useState(getUsers())   // in loc de getDeparts functie care returneaza toti utilizatorii
+    const [departs, setDeparts] = useState([]);
+    
+    useEffect(() => {
+        const getDeparts = async () => {
+            const response = await fetch("http://localhost:5000/user", {credentials: "include"})
+            const data = await response.json()
+
+            console.log("aici sunt toate departamentele")
+            setDeparts(data.users);
+            }
+            getDeparts()
+    }, [])
+
+    // in loc de getDeparts functie care returneaza toti utilizatorii
 
     const [AddGroup, setAddGroup] = useState(false);
     const [EditGroup, setEditGroup] = useState(false);
@@ -174,12 +188,12 @@ export default function groupsManagement({groups}){
 
                     {departs && <FormGroup className={styles.usersContainer}>
                         {departs.map((user) => (
-                            <div key={user} className={styles.userCheck}>
+                            <div key={user._id} className={styles.userCheck}>
                                 <FormControlLabel control={<Checkbox
                                     checked={SelectedGroups.includes(user)}
                                     onChange={handleGroupClick(user)}
                                 />
-                                } label={user} />
+                                } label={user.username} />
                             </div>
                         ))}
                     </FormGroup>
