@@ -6,6 +6,9 @@ import React, {useState} from "react";
 
 
 function getUsers(){
+
+    // tr inlocuit cu un get/users (si useri normali si admins)
+
     return [
         "departament 1",
         "departament 2",
@@ -21,8 +24,6 @@ function getUsers(){
 
 export default function groupsManagement({groups}){
 
-    const{name, users} = groups
-
     const [departs, setDeparts] = useState(getUsers())   // in loc de getDeparts functie care returneaza toti utilizatorii
 
     const [AddGroup, setAddGroup] = useState(false);
@@ -31,6 +32,7 @@ export default function groupsManagement({groups}){
     const [Groups, setGroups] = useState(groups);
     const [SelectedGroups, setSelectedGroups] = useState([]);
     const [EditedGroup, setEditedGroup] = useState(null)
+    const [CheckedUsers, setCheckedUsers] = useState([])
 
     const [GroupName, setGroupName] = useState("")
 
@@ -81,30 +83,56 @@ export default function groupsManagement({groups}){
 
     const showEditGroupClick = (group) => {
         setEditedGroup(group)
-        console.log(group);
+        setCheckedUsers(group.users)
         setGroupName(group.name)
         setEditGroup(true);
     };
 
+    const handleGroupItemClick = (user) => () => {
+        // if (EditedGroup.users.includes(user)) {
+        //   // User is already in the group, remove it
+        //   setEditedGroup((prevGroup) => ({
+        //     ...prevGroup,
+        //     users: prevGroup.users.filter((u) => u !== user),
+        //   }));
+        // } else {
+        //   // User is not in the group, add it
+        //   setEditedGroup((prevGroup) => ({
+        //     ...prevGroup,
+        //     users: [...prevGroup.users, user],
+        //   }));
+        // }
+
+        if (CheckedUsers.includes(user)) {
+            // User is already in the CheckedUsers, remove it
+            setCheckedUsers((prevUsers) => prevUsers.filter((u) => u !== user));
+          } else {
+            // User is not in the CheckedUsers, add it
+            setCheckedUsers((prevUsers) => [...prevUsers, user]);
+          }
+
+
+      };
+      
+
     const handleEditGroupClick = () =>{
 
-        const group = {
+        const updatedGroup = {
             name: GroupName,
-            users: SelectedGroups
-        }
+            users: CheckedUsers,
+        };
+        const updatedGroups = Groups.map((group) =>
+            group === EditedGroup ? updatedGroup : group
+        );
 
-        console.log(Groups);
-        const filteredEvents = Groups.filter((event) => event.id !== EditedGroup);
+        setGroups(updatedGroups);
 
-        console.log(filteredEvents);
-
-
-        setGroups([...filteredEvents, group])
         setSelectedGroups([])
         setGroupName("")
-        setAddGroup(false);
+        setEditGroup(false);
 
-        console.log(group); // post group in db
+        console.log(EditedGroup);
+        console.log(updatedGroup); // put group in db (inlocuieste EditedGroup cu updatedGroup)
     }
 
 
@@ -183,18 +211,25 @@ export default function groupsManagement({groups}){
                         />
                     </div>
 
-                    {departs && <FormGroup className={styles.usersContainer}>
+
+                    {departs && (
+                    <FormGroup className={styles.usersContainer}>
                         {departs.map((user) => (
                             <div key={user} className={styles.userCheck}>
-                                <FormControlLabel control={<Checkbox
-                                    checked={EditedGroup.users.includes(user)}
-                                    onChange={handleGroupClick(user)}
+                                <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    checked={CheckedUsers.includes(user)}
+                                    onChange={handleGroupItemClick(user)}
+                                    />
+                                }
+                                label={user}
                                 />
-                                } label={user} />
                             </div>
                         ))}
                     </FormGroup>
-                    }
+                    )}
+
                 </div>
             </>
         }

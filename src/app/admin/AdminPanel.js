@@ -20,9 +20,13 @@ import CreateEventForm from "@/components/molecules/CreateEventForm";
 import EditEventForm from "@/components/molecules/EditEventForm";
 import SendInvites from "@/components/molecules/SendInvites";
 import ManageEvents from "@/components/organisms/ManageEvents";
+import ManageAdmins from "@/components/organisms/ManageAdmins";
 
 function getGroups()
 {
+
+    // tr inlocuit cu un get/groups
+
   return [
     {
       name: "HR",
@@ -39,53 +43,13 @@ function getGroups()
   ]
 }
 
-function getEvents(){
-  return [
-    {
-      "id": 145223,
-      "titlu": "Event 1",
-      "data": "2023-07-27T12:21",
-      "locatie": "Timisoara",
-      "descriere": "Descriere 1",
-      "tag": "PainBall",
-      "users": [
-          "user 1",
-          "user 2",
-          "user 4"
-      ],
-      "groups": [
-          "departament 2",
-          "departament 3"
-      ]
-  },
-  {
-    "id": 124324,
-    "titlu": "Event 2",
-    "data": "2023-07-27T12:21",
-    "locatie": "Sibiu",
-    "descriere": "Descriere 2",
-    "tag": "Movie Night",
-    "users": [
-        "user 1",
-        "user 3",
-        "user 4"
-    ],
-    "groups": [
-        "departament 1",
-        "departament 3"
-    ]
-}
-  ]
-}
+
 
 export default function AdminPanel() {
   const { user, setUser, isAuthenticated, setIsAuthenticated } =
     useContext(AuthContext);
 
-  const events = getEvents()
-
   const selectedMenu = useMenu()
-  console.log(selectedMenu)
 
   return (
       <>
@@ -98,10 +62,8 @@ export default function AdminPanel() {
               {selectedMenu === "Manage Events" && <ManageEvents /> }
               {selectedMenu === "Manage Groups" && <GroupsManagement groups={getGroups()}/> }
               {selectedMenu === "Send Invites" && <SendInvites /> }
+              {selectedMenu === "Manage Admins" && <ManageAdmins /> }
 
-              {/* <ManageEvents /> */}
-              {/* <GroupsManagement groups={getGroups()}/> */}
-              {/* <SendInvites/> */}
             </div>
           </div>
         </div>

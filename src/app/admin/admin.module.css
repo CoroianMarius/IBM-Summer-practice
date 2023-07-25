@@ -110,3 +110,11 @@
 .spaceBetween{
     justify-content: space-between;
 }
+
+.deletePopUp{
+    height: fit-content;
+}
+
+.bgRed{
+    background-color: #EE4747;
+}
