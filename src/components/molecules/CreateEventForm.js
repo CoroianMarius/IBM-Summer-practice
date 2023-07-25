@@ -16,43 +16,17 @@ function getTags() {
     ];
   }
 
-function getUsers(){
-    return [
-        {
-            id:"1234",
-            username: "vlad",
-            password: "12344",
-            role: "admin",
-        },
-        {
-            id:"12345",
-            username: "dani",
-            password: "12344",
-            role: "admin",
-        },
 
-    ]
 
-}
 
-function getDeparts(){
-    return [
-        "departament 1",
-        "departament 2",
-        "departament 3",
-        "departament 4",
-        "departament 5"
-    ]
-    
-}
 
 export default function CreateEventForm(){
 
     const tags = getTags()
     const [selectedTag, setSelectedTag] = useState("")
     
-    const [users, setUsers] = useState(getUsers())
-    const [departs, setDeparts] = useState(getDeparts())
+    const [users, setUsers] = useState([])
+    const [departs, setDeparts] = useState([])
 
     const [AddPerson, setAddPeople] = useState(false);
     const [AddGroup, setAddGroup] = useState(false);
@@ -173,7 +147,13 @@ export default function CreateEventForm(){
 
 
 
-
+    useEffect(()=> {
+        async function getDeparts(){
+            setDeparts((await axios.get('http://localhost:5000/groups', {withCredentials:true})).data.groups)
+        }
+        getDeparts()
+    }, [])
+    console.log(departs)
 
 
 
@@ -231,7 +211,7 @@ export default function CreateEventForm(){
                         <div key={person.id} onClick={() => removePerson(person)} className={styles.tag}>{person.username}</div>
                     ))}
                     {Groups?.map((group) =>(
-                        <div key={group} onClick={() => removeGruop(group)} className={styles.tag}>{group}</div>
+                        <div key={group.id} onClick={() => removeGruop(group)} className={styles.tag}>{group.name}</div>
                     ))}
 
                 </div>
@@ -275,12 +255,12 @@ export default function CreateEventForm(){
 
                         {departs && <FormGroup className={styles.usersContainer}>
                             {departs.map((user) => (
-                                <div key={user} className={styles.userCheck}>
+                                <div key={user.id} className={styles.userCheck}>
                                     <FormControlLabel control={<Checkbox 
                                             checked={SelectedGroups.includes(user)}
                                             onChange={handleGroupClick(user)}
                                         />
-                                    } label={user} />
+                                    } label={user.name} />
                                 </div>
                             ))} 
                         </FormGroup>
