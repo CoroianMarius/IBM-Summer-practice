@@ -1,5 +1,8 @@
+'use client'
+
 import EventCard from "./EventCard"
 import styles from "@/app/events/events.module.css"
+import { useState, useEffect } from "react"
 
 function getInvitedEvents(){
     return [ 
@@ -22,9 +25,22 @@ function getInvitedEvents(){
             participanti: ["User 1", "User 2", "User 3", "User 4", "User 5"],
         }
     ]
+
 }
 
 export default function InvitedEvents() {
+    const [invitedEvents2, setInvitedEvents2] = useState([])
+
+    useEffect(() => {
+        const getInvitedEvents2 = async () => {
+            const response = await fetch("http://localhost:5000/events/invites", {credentials: "include"})
+            const data = await response.json()
+            
+            console.log("aici sunt toate eventurile la care sunt invitat'")
+            console.log(data)
+            }
+        getInvitedEvents2()
+    }, [])
 
     const invitedEvents = getInvitedEvents()
 
