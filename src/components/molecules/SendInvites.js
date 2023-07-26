@@ -13,15 +13,7 @@ import axios from "axios";
 
 
 
-function getUsers(){
-    return [
-        "user 1",
-        "user 2",
-        "user 3",
-        "user 4",
 
-    ]
-}
 
 function getGroups(){
     return [
@@ -36,8 +28,8 @@ function getGroups(){
 function SendInvites() {
     const [events, setEvents]= useState([])
     const [selectedEvent, setSelectedEvent] = useState(null);
-    const users = getUsers();
-    const groups = getGroups();
+    const [users, setUsers] = useState([]);
+    const [groups, setGroups] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [selectedGroups, setSelectedGroups] = useState([]);
   
@@ -75,7 +67,7 @@ function SendInvites() {
       setSelectedGroups((prevSelectedGroups) => prevSelectedGroups.filter((g) => g !== group));
     };
 
-    const handleSubmin = () => {
+    const handleSubmin = async() => {
       const invites = {
         event: selectedEvent,
         users: selectedUsers,
@@ -83,6 +75,31 @@ function SendInvites() {
       }
 
       console.log(invites)
+
+
+        try {
+            const response = await fetch('http://localhost:5000/events/invite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(invites),
+                credentials: 'include', // This enables sending cookies with the request
+            });
+
+            if (!response.ok) {
+                throw new Error('Request failed with status ' + response.status);
+            }
+
+            const data = await response.json();
+            console.log(data); // Do something with the response data if needed
+
+        } catch (error) {
+            console.error(error);
+        }
+
+
+
     }
 
     useEffect(()=>{
@@ -94,9 +111,34 @@ function SendInvites() {
     console.log(events)
 
 
+    useEffect(() => {
+        async function getUsers() {
+            if (selectedEvent) { // Check if selectedEvent is not null before making the API call
+                try {
+                    const response = await axios.get(`http://localhost:5000/events/users/${selectedEvent._id}`, { withCredentials: true });
+                    const responseGroups = await axios.get('http://localhost:5000/groups', {withCredentials:true});
+                    console.log(responseGroups.data.groups);
+
+                    setGroups(responseGroups.data.groups);
+                    setUsers(response.data.users);
+                } catch (error) {
+                    // Handle any errors that might occur during the API call
+                    console.error("Error fetching users:", error);
+                }
+            }
+        }
+        getUsers();
+    }, [selectedEvent]);
 
 
-  
+
+
+
+
+
+
+
+
     return (
       <div>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -119,21 +161,46 @@ function SendInvites() {
         {selectedEvent && (
           <>
             <button onClick={handleSubmin} className={styles.button}>Send Invites</button>
-
-            <div>
+              <div>
+                  <h3>Groups</h3>
+                  <FormGroup>
+                      {groups.map((group) => (
+                          <FormControlLabel
+                              key={group._id}
+                              control={
+                                  <Checkbox
+                                      checked={selectedGroups.includes(group)}
+                                      onChange={handleSelectGroups}
+                                      value={group.name}
+                                  />
+                              }
+                              label={group.name}
+                          />
+                      ))}
+                  </FormGroup>
+                  {selectedGroups.map((group) => (
+                      <div key={group}>
+                          <span>{group}</span>
+                          <IconButton onClick={() => handleRemoveGroup(group)} aria-label="delete">
+                              <DeleteIcon />
+                          </IconButton>
+                      </div>
+                  ))}
+              </div>
+              <div>
               <h3>Users</h3>
               <FormGroup>
                 {users.map((user) => (
                   <FormControlLabel
-                    key={user}
+                    key={user._id}
                     control={
                       <Checkbox
                         checked={selectedUsers.includes(user)}
                         onChange={handleSelectPeople}
-                        value={user}
+                        value={user.username}
                       />
                     }
-                    label={user}
+                    label={user.username}
                   />
                 ))}
               </FormGroup>
@@ -147,32 +214,7 @@ function SendInvites() {
               ))}
             </div>
   
-            {/* <div>
-              <h3>Groups</h3>
-              <FormGroup>
-                {groups.map((group) => (
-                  <FormControlLabel
-                    key={group}
-                    control={
-                      <Checkbox
-                        checked={selectedGroups.includes(group)}
-                        onChange={handleSelectGroups}
-                        value={group}
-                      />
-                    }
-                    label={group}
-                  />
-                ))}
-              </FormGroup>
-              {selectedGroups.map((group) => (
-                <div key={group}>
-                  <span>{group}</span>
-                  <IconButton onClick={() => handleRemoveGroup(group)} aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </div>
-              ))}
-            </div> */}
+
             
 
           </>
