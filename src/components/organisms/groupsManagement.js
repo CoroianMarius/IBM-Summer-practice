@@ -38,8 +38,6 @@ export default function groupsManagement({groups}){
             getDeparts()
     }, [])
 
-    // in loc de getDeparts functie care returneaza toti utilizatorii
-
     const [AddGroup, setAddGroup] = useState(false);
     const [EditGroup, setEditGroup] = useState(false);
 
@@ -86,6 +84,19 @@ export default function groupsManagement({groups}){
         setAddGroup(false);
 
         console.log(group); // post group in db
+
+        //make a request to the server to create a new group with the data from the form and the user id from the context (the user that created the group)
+        // axios.post("http://localhost:5000/groups", group, {withCredentials: true})
+        // .then(res => {
+        //     console.log(res)
+        // }
+        // )
+        // .catch(err => {
+        //     console.log(err)
+        // }
+        // )
+
+        
     }
 
 
