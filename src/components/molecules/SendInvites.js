@@ -67,7 +67,7 @@ function SendInvites() {
       setSelectedGroups((prevSelectedGroups) => prevSelectedGroups.filter((g) => g !== group));
     };
 
-    const handleSubmin = () => {
+    const handleSubmin = async() => {
       const invites = {
         event: selectedEvent,
         users: selectedUsers,
@@ -75,6 +75,31 @@ function SendInvites() {
       }
 
       console.log(invites)
+
+
+        try {
+            const response = await fetch('http://localhost:5000/events/invite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(invites),
+                credentials: 'include', // This enables sending cookies with the request
+            });
+
+            if (!response.ok) {
+                throw new Error('Request failed with status ' + response.status);
+            }
+
+            const data = await response.json();
+            console.log(data); // Do something with the response data if needed
+
+        } catch (error) {
+            console.error(error);
+        }
+
+
+
     }
 
     useEffect(()=>{
@@ -104,6 +129,15 @@ function SendInvites() {
         }
         getUsers();
     }, [selectedEvent]);
+
+
+
+
+
+
+
+
+
 
     return (
       <div>
