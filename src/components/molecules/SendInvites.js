@@ -118,6 +118,8 @@ function SendInvites() {
   
         {selectedEvent && (
           <>
+            <button onClick={handleSubmin} className={styles.button}>Send Invites</button>
+
             <div>
               <h3>Users</h3>
               <FormGroup>
@@ -145,7 +147,7 @@ function SendInvites() {
               ))}
             </div>
   
-            <div>
+            {/* <div>
               <h3>Groups</h3>
               <FormGroup>
                 {groups.map((group) => (
@@ -170,9 +172,8 @@ function SendInvites() {
                   </IconButton>
                 </div>
               ))}
-            </div>
+            </div> */}
             
-            <button onClick={handleSubmin} className={styles.button}>Send Invites</button>
 
           </>
         )}

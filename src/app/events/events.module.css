@@ -25,4 +25,13 @@
     margin-top: 2%;
 }
 
+.mapContainer{
+    margin: 2% auto;
+    width: 60%;
+    height: 70vh;
+    padding: 2% 3%;
+    border-radius: 15px;
+    background-color: white;
+}
+
 

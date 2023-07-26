@@ -6,6 +6,8 @@ import { DateTimePicker } from "@mui/x-date-pickers"; // Import the DateTimePick
 import EventTag from "../atoms/EventTag";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { AddressAutofill } from "@mapbox/search-js-react";
+import LocationSearchBar from "./LocationSearchBar";
 
 function getTags() {
     return [
@@ -18,7 +20,6 @@ function getTags() {
 
 
 export default function CreateEventForm(){
-
     const tags = getTags()
     const [selectedTag, setSelectedTag] = useState("")
     
@@ -37,20 +38,26 @@ export default function CreateEventForm(){
     const [SelectedPeople, setSelectedPeople] = useState([]);
     const [SelectedGroups, setSelectedGroups] = useState([]);
 
+    const [Locatie, setLocatie] = useState(""); 
 
     //ia toti userii din grupuri si ii pune intr-un array
     const [invites, setInvites] = useState([])
 
-    useEffect(() => {
-        async function getInvites(){
-            const response =  await (await axios.get('http://localhost:5000/events/invited-users',{withCredentials:true})).data.invitedUsers
-            setInvites(response)
-        }
-        getInvites()
-    },[])
-    console.log('aici sunt toti invitatii din grupuri, trebuie sa le trimit mail la fiecare')
-    console.log(invites)
+    // useEffect(() => {
+    //     async function getInvites(){
+    //         const response =  await (await axios.get('http://localhost:5000/events/invited-users',{withCredentials:true})).data.invitedUsers
+    //         setInvites(response)
+    //     }
+    //     getInvites()
+    // },[])
+    // console.log('aici sunt toti invitatii din grupuri, trebuie sa le trimit mail la fiecare')
+    // console.log(invites)
 
+
+    async function getInvites(){
+        const response =  await (await axios.get('http://localhost:5000/events/invited-users',{withCredentials:true})).data.invitedUsers
+        setInvites(response)
+    }
 
 
     useEffect(() => {
@@ -131,58 +138,94 @@ export default function CreateEventForm(){
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        
 
-
+        const groupsUsers = [];
+        const promises = Groups.map(async (group) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/groups/${group.name}`, { withCredentials: true });
+            const users = response.data.users;
+            groupsUsers.push(...users);
+        } catch (error) {
+            console.error(`Error fetching users for group ${group.name}:`, error);
+            groupsUsers.push([]);
         }
+        });
 
+        const usernamesArray = People.map(user => user.username);
+        groupsUsers.push(...usernamesArray);
+
+        Promise.all(promises).then(async () => { // Wrap the callback in an async function
+            
+            const event = {
+                title: e.target.titlu.value,
+                date: e.target.data.value,
+                location: Locatie,
+                description: e.target.descriere.value,
+                tags: selectedTag,
+                invites: [...new Set(groupsUsers)]
+            };
+        
+            try {
+                const response = await fetch('http://localhost:5000/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(event),
+                    credentials: 'include', // This enables sending cookies with the request
+                });
+        
+                if (!response.ok) {
+                    throw new Error('Request failed with status ' + response.status);
+                }
+        
+                const data = await response.json();
+                console.log(data); // Do something with the response data if needed
+        
+            } catch (error) {
+                console.error(error);
+            }
+        
+        });
         
 
+        // Wait for all promises to resolve
+        // Promise.all(promises).then(() => {
+            
+        //     const event = {
+        //         title: e.target.titlu.value,
+        //         date: e.target.data.value,
+        //         location: Locatie,
+        //         description: e.target.descriere.value,
+        //         tags: selectedTag,
+        //         invites: [...new Set(groupsUsers)]
+        //     };
 
-        //aici fac un fetch sa iau toti userii din fiecare grup (array de useri mare va fi)
-        //si dupa ii adaug intr-un array   
-        //si inlocuesc users si groups cu un singur array de invited 
+        //     try {
+        //         const response = await fetch('http://localhost:5000/events', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //             body: JSON.stringify(event),
+        //             credentials: 'include', // This enables sending cookies with the request
+        //         });
+        
+        //         if (!response.ok) {
+        //             throw new Error('Request failed with status ' + response.status);
+        //         }
+        
+        //         const data = await response.json();
+        //         console.log(data); // Do something with the response data if needed
+        
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
 
+        // });
 
-
-        // const event = {
-        //     title: e.target.titlu.value,
-        //     date: e.target.data.value,
-        //     location: e.target.locatie.value,
-        //     description: e.target.descriere.value,
-        //     tags: selectedTag,
-        //     users: People,
-        //     groups: Groups
-        // };
+    }
     
-    //     try {
-    //         const response = await fetch('http://localhost:5000/events', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(event),
-    //             credentials: 'include', // This enables sending cookies with the request
-    //         });
-    
-    //         if (!response.ok) {
-    //             throw new Error('Request failed with status ' + response.status);
-    //         }
-    
-    //         const data = await response.json();
-    //         console.log(data); // Do something with the response data if needed
-    
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-    
-
-
-
-
-
-
 
 
     useEffect(()=> {
@@ -206,11 +249,9 @@ export default function CreateEventForm(){
     console.log(departs)
 
 
-
-
-
-
-
+    const handleChangeLocation = (location) => {
+        setLocatie(location);
+      };
 
     return <div className={styles.formContainerEvent}>
         <form className={styles.mainForm} onSubmit={onSubmit}>
@@ -221,8 +262,8 @@ export default function CreateEventForm(){
             <p >Data</p>
             <input name="data" className={styles.input} type="datetime-local"/>
 
-            <p >Locatie</p>
-            <input name="locatie" className={styles.input} type="text"/>
+            <p>Locatie</p>
+            <LocationSearchBar changeLocation={handleChangeLocation} />
 
             <p >Descriere</p>
             <input name="descriere" className={styles.input} type="text"/>
@@ -234,7 +275,7 @@ export default function CreateEventForm(){
 
         <div className={styles.sideForm}>
             <p >Tag</p> 
-            <FormControl fullWidth>
+            <FormControl className={styles.width70}>
                 <NativeSelect
                 className={styles.input}
                 inputProps={{
@@ -250,7 +291,7 @@ export default function CreateEventForm(){
             </FormControl>
             
             <p >Participanti</p> 
-            <div className={styles.containerParticipanti}>
+            <div className={`${styles.containerParticipanti} ${styles.width70}`}>
                 <div className={styles.controllBtns}>
                     <div onClick={showAddPersonClick} className={styles.tagWhite}>Add Person</div>
                     <div onClick={showAddGroupClick} className={styles.tagWhite}>Add Group</div>

@@ -31,6 +31,7 @@
     display: flex;
     flex-direction: row;
     gap: 15%;
+    width: 80vw;
 }
 
 .mainForm{
@@ -145,4 +146,30 @@
     border-radius: 15px;
     margin-bottom: 2%;
 
+}
+
+.width70{
+    width: 70%;
+}
+
+.suggestionContainer{
+    margin-top: 2%;
+    background-color: #E1E4EA;
+    padding: 5%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.suggestion{
+    background-color: #E1E4EA;
+    color: #333333;
+    padding: 1%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.suggestion:hover{
+    background-color: white;
+    color: black;
 }
