@@ -38,6 +38,21 @@ export default function CreateEventForm(){
     const [SelectedGroups, setSelectedGroups] = useState([]);
 
 
+    //ia toti userii din grupuri si ii pune intr-un array
+    const [invites, setInvites] = useState([])
+
+    useEffect(() => {
+        async function getInvites(){
+            const response =  await (await axios.get('http://localhost:5000/events/invited-users',{withCredentials:true})).data.invitedUsers
+            setInvites(response)
+        }
+        getInvites()
+    },[])
+    console.log('aici sunt toti invitatii din grupuri, trebuie sa le trimit mail la fiecare')
+    console.log(invites)
+
+
+
     useEffect(() => {
         setUsers(users.filter((item) => !People.includes(item)))
     }, [People])
@@ -113,22 +128,55 @@ export default function CreateEventForm(){
         setDeparts(InitialGroups.filter((item) => !updatedPeople.includes(item)))
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
-        const event = {
-            titlu: e.target.titlu.value,
-            data: e.target.data.value,
-            locatie: e.target.locatie.value,
-            descriere: e.target.descriere.value,
-            tag: selectedTag,
-            users: People,
-            groups: Groups
+        
+
+
         }
 
-        console.log(event);
+        
 
-      };
+
+        //aici fac un fetch sa iau toti userii din fiecare grup (array de useri mare va fi)
+        //si dupa ii adaug intr-un array   
+        //si inlocuesc users si groups cu un singur array de invited 
+
+
+
+        // const event = {
+        //     title: e.target.titlu.value,
+        //     date: e.target.data.value,
+        //     location: e.target.locatie.value,
+        //     description: e.target.descriere.value,
+        //     tags: selectedTag,
+        //     users: People,
+        //     groups: Groups
+        // };
+    
+    //     try {
+    //         const response = await fetch('http://localhost:5000/events', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(event),
+    //             credentials: 'include', // This enables sending cookies with the request
+    //         });
+    
+    //         if (!response.ok) {
+    //             throw new Error('Request failed with status ' + response.status);
+    //         }
+    
+    //         const data = await response.json();
+    //         console.log(data); // Do something with the response data if needed
+    
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+    
 
 
 
