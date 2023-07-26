@@ -34,8 +34,7 @@ function SendInvites() {
     const [selectedGroups, setSelectedGroups] = useState([]);
   
     const handleSelectEvent = (event) => {
-      const selectedEventId = event.target.value;
-      const selectedEventObject = events.find((event) => event.id === selectedEventId);
+      const selectedEventObject = event.target.value;
       setSelectedEvent(selectedEventObject);
       setSelectedUsers([]);
       setSelectedGroups([]);
@@ -68,6 +67,8 @@ function SendInvites() {
     };
 
     const handleSubmin = async () => {
+
+        console.log(selectedEvent);
 
         const groupsUsers = [];
         const promises = selectedGroups.map(async (group) => {
@@ -144,12 +145,6 @@ function SendInvites() {
 
 
 
-
-
-
-
-
-
     return (
       <div>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -157,16 +152,18 @@ function SendInvites() {
           <Select
             labelId="demo-simple-select-helper-label"
             id="demo-simple-select-helper"
-            value={selectedEvent?.id || ""}
+            value={selectedEvent || ""}
             label="Event"
             onChange={handleSelectEvent}
           >
             {events.map((event) => (
-              <MenuItem key={event.id} value={event.id}>
+              <MenuItem key={event._id} value={event}>
                 {event.title}
               </MenuItem>
             ))}
           </Select>
+
+
         </FormControl>
   
         {selectedEvent && (
