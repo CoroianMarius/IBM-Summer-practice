@@ -9,45 +9,9 @@ import {  Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuIt
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateEventForm from "@/components/molecules/CreateEventForm";
+import axios from "axios";
 
-function getEvents(){
-    return [
-        {
-            "id": 145223,
-            "titlu": "Event 1",
-            "data": "2023-07-27T12:21",
-            "locatie": "Timisoara",
-            "descriere": "Descriere 1",
-            "tag": "PainBall",
-            "users": [
-                "user 1",
-                "user 2",
-                "user 4"
-            ],
-            "groups": [
-                "departament 2",
-                "departament 3"
-            ]
-        },
-        {
-            "id": 124324,
-            "titlu": "Event 2",
-            "data": "2023-07-27T12:21",
-            "locatie": "Sibiu",
-            "descriere": "Descriere 2",
-            "tag": "Movie Night",
-            "users": [
-                "user 1",
-                "user 3",
-                "user 4"
-            ],
-            "groups": [
-                "departament 1",
-                "departament 3"
-            ]
-        }
-    ]
-}
+
 
 function getUsers(){
     return [
@@ -70,7 +34,7 @@ function getGroups(){
 }
 
 function SendInvites() {
-    const events = getEvents();
+    const [events, setEvents]= useState([])
     const [selectedEvent, setSelectedEvent] = useState(null);
     const users = getUsers();
     const groups = getGroups();
@@ -120,7 +84,18 @@ function SendInvites() {
 
       console.log(invites)
     }
-    
+
+    useEffect(()=>{
+        async function getEvents(){
+            setEvents((await axios.get('http://localhost:5000/events',{withCredentials:true})).data.events)
+        }
+        getEvents()
+    }, [])
+    console.log(events)
+
+
+
+
   
     return (
       <div>
@@ -135,7 +110,7 @@ function SendInvites() {
           >
             {events.map((event) => (
               <MenuItem key={event.id} value={event.id}>
-                {event.titlu}
+                {event.title}
               </MenuItem>
             ))}
           </Select>
@@ -143,6 +118,8 @@ function SendInvites() {
   
         {selectedEvent && (
           <>
+            <button onClick={handleSubmin} className={styles.button}>Send Invites</button>
+
             <div>
               <h3>Users</h3>
               <FormGroup>
@@ -170,7 +147,7 @@ function SendInvites() {
               ))}
             </div>
   
-            <div>
+            {/* <div>
               <h3>Groups</h3>
               <FormGroup>
                 {groups.map((group) => (
@@ -195,9 +172,8 @@ function SendInvites() {
                   </IconButton>
                 </div>
               ))}
-            </div>
+            </div> */}
             
-            <button onClick={handleSubmin} className={styles.button}>Send Invites</button>
 
           </>
         )}
