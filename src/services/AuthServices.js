@@ -69,7 +69,18 @@ export default {
                 else
                     return { isAuthenticated: false, user: { username: "", role: "" } }
             })
-     }
+     },
+
+    //_____________________________Este admin_______________________________
+    isAdmin:  () => {
+    return fetch('http://localhost:5000/user/admin',{credentials: 'include'})
+          .then(res => {
+              if (res.status !== 401)
+                  return res.json().then(data => data)
+              else
+                  return { isAdmin: false }
+          })
+  }
 }
 
 

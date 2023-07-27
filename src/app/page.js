@@ -10,6 +10,7 @@ import { useContext, useEffect,useState } from "react";
 import styles from "@/css/homepage.module.css";
 import axios from "axios";
 import UpcomingEvents from "@/components/molecules/UpcomingEvents";
+import NotLogged from "@/components/molecules/NotLogged";
 
 
 
@@ -22,8 +23,7 @@ function isAdmin() {
 
 export default function Home(props) {
 
-  const { user, setUser, isAuthenticated, setIsAuthenticated } =
-    useContext(AuthContext);
+  const { isAuthenticated, isAdmin} = useContext(AuthContext);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -32,11 +32,14 @@ export default function Home(props) {
     }
     fetchUndiscoveredEvents()
   },[])
-  console.log(events)
+
+  if (!isAuthenticated) {
+    return <NotLogged />
+  }
 
   return (
     <>
-      {isAuthenticated ? isAdmin() ? <NavAdmin /> : <NavAuth /> : <Nav />}
+      {isAdmin ? <NavAdmin /> : <NavAuth />}
       
       <br></br>
       <br></br>
@@ -53,7 +56,6 @@ export default function Home(props) {
         <UpcomingEvents />
       </div>
 
-      
     </>
   );
 }

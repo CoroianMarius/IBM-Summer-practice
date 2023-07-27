@@ -16,16 +16,23 @@ import {
   ToggleButton,
   ToggleButtonGroup
 } from "@mui/material";
-import CreateEventForm from "@/components/molecules/CreateEventForm";
-import EditEventForm from "@/components/molecules/EditEventForm";
 import SendInvites from "@/components/molecules/SendInvites";
 import ManageEvents from "@/components/organisms/ManageEvents";
 import ManageAdmins from "@/components/organisms/ManageAdmins";
+import NotAdmin from "@/components/molecules/NotAdmin";
+import NotLogged from "@/components/molecules/NotLogged";
 
 
 export default function AdminPanel() {
-  const { user, setUser, isAuthenticated, setIsAuthenticated } =
-    useContext(AuthContext);
+  const {isAuthenticated, isAdmin } = useContext(AuthContext);
+
+  if (!isAuthenticated) {
+    return <NotLogged />
+  }
+
+  if (!isAdmin){
+    return <NotAdmin />
+  }
 
   const selectedMenu = useMenu()
 

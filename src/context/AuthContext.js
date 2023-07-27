@@ -11,6 +11,7 @@ export default ({children}) => {
 
     const [user,setUser] = useState(null)
     const [isAuthenticated,setIsAuthenticated] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
     const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(() => {
@@ -18,13 +19,18 @@ export default ({children}) => {
             setUser(data.user)
             setIsAuthenticated(data.isAuthenticated)
             setIsLoaded(true)
+            
+            AuthServices.isAdmin().then(data => {
+                setIsAdmin(data.isAdmin)
+            }
+            )
         })
     },[])
 
     return (
         <div>
             {isLoaded ? <>
-                <AuthContext.Provider value={{user,setUser,isAuthenticated,setIsAuthenticated}}>
+                <AuthContext.Provider value={{user,setUser,isAuthenticated,setIsAuthenticated,isAdmin}}>
                     {children}
                 </AuthContext.Provider>
             </> : <h1>Loading...</h1>}

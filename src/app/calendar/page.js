@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from  '@fullcalendar/timegrid'
@@ -9,6 +9,10 @@ import multiMonthPlugin from '@fullcalendar/multimonth'
 import NavAdminRel from "@/components/organisms/NavAdminRel"
 import styles from '@/app/calendar/calendar.module.css'
 import axios from 'axios'
+import AuthContext from '@/context/AuthContext'
+import NotLogged from '@/components/molecules/NotLogged'
+import NotAdmin from '@/components/molecules/NotAdmin'
+import NavAuthRel from '@/components/organisms/NavAuthRel'
 
 function getEvents(events){
   
@@ -22,17 +26,24 @@ function getEvents(events){
 
 export default function page() {
 
+  const [isAdmin, setIsAdmin] = useState(false)
+
   const [upcomingEvents, setupcomingEvents] = useState([]);
     useEffect(()=>{
         async function getUpcomingEvents(){
             setupcomingEvents((await axios.get('http://localhost:5000/events/upcoming',{withCredentials:true})).data.events)
+            const adminn = (await axios.get('http://localhost:5000/user/admin',{withCredentials:true})).data.isAdmin;
+            if (adminn) {
+              setIsAdmin(true)
+            }
         }
         getUpcomingEvents()
     }, [])
 
   return <>
-    <NavAdminRel />
 
+    {isAdmin ? <NavAdminRel /> : <NavAuthRel />}
+  
     <div className={styles.main}>
       <FullCalendar
         plugins={[ multiMonthPlugin, dayGridPlugin, timeGridPlugin, interactionPlugin ]}

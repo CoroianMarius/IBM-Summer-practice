@@ -15,15 +15,6 @@ import axios from "axios";
 
 
 
-function getGroups(){
-    return [
-        "departament 1",
-        "departament 2",
-        "departament 3",
-        "departament 4",
-        "departament 5"
-    ]
-}
 
 function SendInvites() {
     const [events, setEvents]= useState([])
@@ -128,7 +119,8 @@ function SendInvites() {
             if (selectedEvent) { // Check if selectedEvent is not null before making the API call
                 try {
                     const response = await axios.get(`http://localhost:5000/events/users/${selectedEvent._id}`, { withCredentials: true });
-                    const responseGroups = await axios.get('http://localhost:5000/groups', {withCredentials:true});
+                    const responseGroups = await axios.get('http://localhost:5000/groups/all', {withCredentials:true});
+                    console.log("groups");
                     console.log(responseGroups.data.groups);
 
                     setGroups(responseGroups.data.groups);
