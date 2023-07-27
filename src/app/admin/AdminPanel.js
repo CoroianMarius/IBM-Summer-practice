@@ -33,7 +33,7 @@ export default function AdminPanel() {
 
   useEffect(() => {
     const getGrps = async () => {
-        const response = await fetch("http://localhost:5000/groups", {credentials: "include"})
+        const response = await fetch("http://localhost:5000/groups/all", {credentials: "include"})
         const data = await response.json()
         
         console.log("aici sunt toate eventurile la care sunt invitat'")

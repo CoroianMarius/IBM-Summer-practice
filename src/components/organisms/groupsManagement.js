@@ -29,14 +29,18 @@ export default function groupsManagement({groups}){
     
     useEffect(() => {
         const getDeparts = async () => {
-            const response = await fetch("http://localhost:5000/user", {credentials: "include"})
-            const data = await response.json()
-
-            console.log("aici sunt toate departamentele")
+          try {
+            const response = await axios.get("http://localhost:5000/user", { withCredentials: true });
+            const data = response.data;
+            console.log("aici sunt toate departamentele", data.users);
             setDeparts(data.users);
-            }
-            getDeparts()
-    }, [])
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        getDeparts();
+      }, []);
+      
 
     const [AddGroup, setAddGroup] = useState(false);
     const [EditGroup, setEditGroup] = useState(false);
@@ -96,6 +100,14 @@ export default function groupsManagement({groups}){
         // }
         // )
 
+        axios
+            .post("http://localhost:5000/groups", group, { withCredentials: true })
+            .then((res) => {
+            console.log(res.data);
+            })
+            .catch((err) => {
+            console.log(err);
+            });
         
     }
 
@@ -140,25 +152,33 @@ export default function groupsManagement({groups}){
       };
       
 
-    const handleEditGroupClick = () =>{
-
+      const handleEditGroupClick = () => {
         const updatedGroup = {
-            name: GroupName,
-            users: CheckedUsers,
+          _id: EditedGroup._id, // Include the _id of the group
+          name: GroupName,
+          users: CheckedUsers,
         };
-        const updatedGroups = Groups.map((group) =>
-            group === EditedGroup ? updatedGroup : group
-        );
-
-        setGroups(updatedGroups);
-
-        setSelectedGroups([])
-        setGroupName("")
+      
+        axios
+          .put(`http://localhost:5000/groups/${EditedGroup._id}`, updatedGroup, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+            setGroups((prevGroups) =>
+              prevGroups.map((group) =>
+                group._id === EditedGroup._id ? res.data.group : group
+              )
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      
+        setSelectedGroups([]);
+        setGroupName("");
         setEditGroup(false);
-
-        console.log(EditedGroup);
-        console.log(updatedGroup); // put group in db (inlocuieste EditedGroup cu updatedGroup)
-    }
+      };
 
 
 
@@ -238,22 +258,23 @@ export default function groupsManagement({groups}){
 
 
                     {departs && (
-                    <FormGroup className={styles.usersContainer}>
-                        {departs.map((user) => (
-                            <div key={user} className={styles.userCheck}>
+                        <FormGroup className={styles.usersContainer}>
+                            {departs.map((user) => (
+                            <div key={user._id} className={styles.userCheck}>
                                 <FormControlLabel
                                 control={
                                     <Checkbox
-                                    checked={CheckedUsers.includes(user)}
-                                    onChange={handleGroupItemClick(user)}
+                                    checked={SelectedGroups.includes(user.username)} // Assuming 'username' is a unique identifier for users
+                                    onChange={handleGroupClick(user.username)} // Assuming 'username' is a unique identifier for users
                                     />
                                 }
-                                label={user}
+                                label={user.username}
                                 />
                             </div>
-                        ))}
-                    </FormGroup>
-                    )}
+                            ))}
+                        </FormGroup>
+                        )}
+
 
                 </div>
             </>
