@@ -34,8 +34,7 @@ function SendInvites() {
     const [selectedGroups, setSelectedGroups] = useState([]);
   
     const handleSelectEvent = (event) => {
-      const selectedEventId = event.target.value;
-      const selectedEventObject = events.find((event) => event.id === selectedEventId);
+      const selectedEventObject = event.target.value;
       setSelectedEvent(selectedEventObject);
       setSelectedUsers([]);
       setSelectedGroups([]);
@@ -67,40 +66,53 @@ function SendInvites() {
       setSelectedGroups((prevSelectedGroups) => prevSelectedGroups.filter((g) => g !== group));
     };
 
-    const handleSubmin = async() => {
-      const invites = {
-        event: selectedEvent,
-        users: selectedUsers,
-        groups: selectedGroups
-      }
+    const handleSubmin = async () => {
 
-      console.log(invites)
+        console.log(selectedEvent);
 
-
-        try {
-            const response = await fetch('http://localhost:5000/events/invite', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(invites),
-                credentials: 'include', // This enables sending cookies with the request
-            });
-
-            if (!response.ok) {
-                throw new Error('Request failed with status ' + response.status);
+        const groupsUsers = [];
+        const promises = selectedGroups.map(async (group) => {
+            try {
+                const response = await axios.get(`http://localhost:5000/groups/${group}`, { withCredentials: true });
+                const users = response.data.users;
+                groupsUsers.push(...users);
+            } catch (error) {
+                console.error(`Error fetching users for group ${group}:`, error);
+                groupsUsers.push([]);
             }
+        });
 
-            const data = await response.json();
-            console.log(data); // Do something with the response data if needed
+        groupsUsers.push(...selectedUsers);
 
-        } catch (error) {
-            console.error(error);
-        }
+        // Wrap the callback in an async function
+        Promise.all(promises).then(async () => {
 
+            const invites = {
+                event: selectedEvent,
+                users: selectedUsers
+            };
+            console.log(invites);
+            try {
+                const response = await fetch('http://localhost:5000/events/invites', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(invites),
+                    credentials: 'include', // This enables sending cookies with the request
+                });
 
+                if (!response.ok) {
+                    throw new Error('Request failed with status ' + response.status);
+                }
 
-    }
+                const data = await response.json();
+                console.log(data); // Do something with the response data if needed
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    };
 
     useEffect(()=>{
         async function getEvents(){
@@ -133,12 +145,6 @@ function SendInvites() {
 
 
 
-
-
-
-
-
-
     return (
       <div>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -146,16 +152,18 @@ function SendInvites() {
           <Select
             labelId="demo-simple-select-helper-label"
             id="demo-simple-select-helper"
-            value={selectedEvent?.id || ""}
+            value={selectedEvent || ""}
             label="Event"
             onChange={handleSelectEvent}
           >
             {events.map((event) => (
-              <MenuItem key={event.id} value={event.id}>
+              <MenuItem key={event._id} value={event}>
                 {event.title}
               </MenuItem>
             ))}
           </Select>
+
+
         </FormControl>
   
         {selectedEvent && (
